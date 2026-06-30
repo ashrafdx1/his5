@@ -1,0 +1,19 @@
+{
+  "name": "his-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/backend",
+    "apps/frontend-web"
+  ],
+  "scripts": {
+    "bootstrap": "npm install",
+    "dev:backend": "npm run start:dev --workspace=apps/backend",
+    "dev:frontend": "npm run dev --workspace=apps/frontend-web",
+    "build:backend": "npm run build --workspace=apps/backend",
+    "build:frontend": "npm run build --workspace=apps/frontend-web",
+    "lint": "npm run lint -w apps/backend -w apps/frontend-web",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  }
+}

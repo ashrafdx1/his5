@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # Database Service (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: his_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-his_db}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-his_secure_password_2026}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - his_network
+
+  # NestJS Backend API Service
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.Dockerfile
+    container_name: his_backend
+    restart: always
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USERNAME: ${DB_USERNAME:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-his_secure_password_2026}
+      DB_DATABASE: ${DB_DATABASE:-his_db}
+      JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-his_super_secret_access_key_change_in_prod_2026}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-his_super_secret_refresh_key_change_in_prod_2026}
+      JWT_ACCESS_EXPIRATION: ${JWT_ACCESS_EXPIRATION:-15m}
+      JWT_REFRESH_EXPIRATION: ${JWT_REFRESH_EXPIRATION:-7d}
+      STORAGE_DRIVER: ${STORAGE_DRIVER:-local}
+      STORAGE_LOCAL_PATH: ${STORAGE_LOCAL_PATH:-./uploads}
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/apps/backend/node_modules
+    networks:
+      - his_network
+
+  # React Web Frontend Service
+  frontend-web:
+    build:
+      context: .
+      dockerfile: docker/frontend-web.Dockerfile
+    container_name: his_frontend_web
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3000/api/v1
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/apps/frontend-web/node_modules
+    networks:
+      - his_network
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  his_network:
+    driver: bridge

@@ -1,0 +1,32 @@
+name: his_mobile
+description: Hospital Information System (HIS) Cross-Platform Mobile Client.
+version: 1.0.0+1
+
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # HTTP Client
+  dio: ^5.3.3
+
+  # State Management
+  provider: ^6.1.1
+
+  # Local Storage for secure tokens
+  flutter_secure_storage: ^9.0.0
+
+  # Icons and Themes
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true

@@ -1,0 +1,67 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+web_member/
+
+# Build and logs
+dist/
+build/
+out/
+.next/
+.nuxt/
+tmp/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment and secrets
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+.env.workspace
+*.pem
+*.key
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Docker logs and db volumes
+docker/data/
+pgdata/
+
+# NestJS specific
+.nestcli.json
+thumbs.db
+
+# React specific
+.eslintcache
+
+# Flutter/Dart specific
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+/build/
+ios/.symlinks/
+android/.gradle/
+*.flutter-plugins
+*.flutter-plugins-dependencies
+.flutter-plugins
+.flutter-plugins-dependencies
+/apps/frontend-mobile/build/
+/apps/frontend-mobile/.dart_tool/
+/apps/frontend-mobile/.packages
+/apps/frontend-mobile/.flutter-plugins
+/apps/frontend-mobile/.flutter-plugins-dependencies
+/apps/frontend-mobile/android/.gradle/
+/apps/frontend-mobile/ios/.symlinks/

@@ -1,0 +1,526 @@
+/* Global Reset and Typography */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* HSL Color Palette - Highly Professional Clinical Light Mode */
+  --bg-primary: 210 40% 98%;      /* #f8fafc - Very light grey-blue */
+  --bg-secondary: 0 0% 100%;       /* #ffffff - Pure white for cards/panels */
+  --bg-tertiary: 210 30% 95%;      /* #f1f5f9 - Light Slate Grey */
+  
+  --accent-blue: 221 83% 53%;      /* #2563eb - Royal Clinical Blue */
+  --accent-teal: 173 80% 40%;      /* #0d9488 - Calming Teal/Emerald */
+  --accent-purple: 245 75% 58%;    /* #6366f1 - Professional Indigo */
+  
+  --text-primary: 215 47% 11%;     /* #0f172a - Deep Slate (Almost Black) */
+  --text-secondary: 215 16% 47%;   /* #64748b - Slate Grey */
+  --text-muted: 215 13% 65%;       /* #94a3b8 - Light Slate */
+  
+  --border-color: 214 32% 91%;     /* #e2e8f0 - Soft Border Grey */
+  --border-glow: 221 83% 53% / 0.08;
+  
+  --success: 142 72% 29%;          /* #15803d - Emerald Green */
+  --warning: 38 92% 50%;           /* #d97706 - Amber Alert */
+  --danger: 350 89% 60%;           /* #e11d48 - Clinical Crimson Red */
+  
+  /* Scrollbar accent - default blue */
+  --scrollbar-color: #2563eb;
+  --scrollbar-color-hover: #1d4ed8;
+  
+  /* Font Declarations */
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Transitions */
+  --transition-smooth: all 0.2s ease-in-out;
+  --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+}
+
+.dark-theme {
+  /* HSL Color Palette - Layered Slate-Dark Corporate Theme */
+  --bg-primary: 222 36% 10%;      /* #0b0f19 - Main dark background (Slate-950) */
+  --bg-secondary: 220 30% 16%;     /* #1b2330 - Cards background (Slate-900 / lighter dark) */
+  --bg-tertiary: 220 25% 22%;      /* #273244 - Accent background (Slate-800) */
+  
+  --accent-blue: 217 91% 64%;      /* #60a5fa - Brighter clinical blue */
+  --accent-teal: 173 80% 48%;      /* #0d9488 - Calming teal */
+  --accent-purple: 245 75% 72%;    /* #818cf8 - Calming indigo */
+  
+  --text-primary: 210 40% 98%;     /* #f8fafc - Soft white text */
+  --text-secondary: 215 20% 80%;   /* #cbd5e1 - Slate 300 text (Readable descriptions) */
+  --text-muted: 215 15% 58%;       /* #64748b - Slate 500 text */
+  
+  --border-color: 220 20% 25%;     /* #303c51 - Distinct visible dark borders */
+  --border-glow: 217 91% 64% / 0.15;
+  
+  --success: 142 72% 45%;
+  --warning: 38 92% 55%;
+  --danger: 350 89% 65%;
+}
+
+/* Custom Scrollbar Styling - Hidden by default, appears on interaction/hover */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+*:hover {
+  scrollbar-color: var(--scrollbar-color, #2563eb) transparent;
+}
+
+/* Webkit browser scrollbars (Chrome, Safari, Edge, etc.) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Make scrollbar thumb visible when parent container is hovered */
+*:hover::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color, #2563eb);
+}
+
+*:hover::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-color-hover, #1d4ed8);
+}
+
+body {
+  background-color: hsl(var(--bg-primary));
+  color: hsl(var(--text-primary));
+  font-family: var(--font-body);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: hsl(var(--text-primary));
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+/* Background Gradients & Glow Effects */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: hsl(var(--bg-primary));
+  background-image: 
+    radial-gradient(circle at 5% 5%, hsl(var(--accent-blue) / 0.04) 0%, transparent 35%),
+    radial-gradient(circle at 95% 95%, hsl(var(--accent-teal) / 0.03) 0%, transparent 35%);
+  transition: background-color 0.3s ease;
+}
+
+/* Premium Card / Panel System */
+.glass-panel {
+  background: hsl(var(--bg-secondary));
+  border: 1px solid hsl(var(--border-color));
+  border-radius: 12px;
+  box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.04), 0 2px 8px -2px rgba(15, 23, 42, 0.02);
+  transition: var(--transition-smooth), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: hsl(var(--accent-blue) / 0.45);
+  box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.08), 0 4px 12px -4px rgba(15, 23, 42, 0.03), 0 0 15px hsl(var(--accent-blue) / 0.08);
+}
+
+/* Buttons with Professional Micro-animations */
+.btn-primary {
+  background: linear-gradient(135deg, hsl(var(--accent-blue)), hsl(var(--accent-blue) / 0.9));
+  color: #fff;
+  border: 1px solid hsl(var(--accent-blue) / 0.1);
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 hsl(var(--accent-blue) / 0.15);
+  transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, hsl(var(--accent-blue) / 0.95), hsl(var(--accent-blue) / 0.85));
+  box-shadow: 0 4px 12px 0 hsl(var(--accent-blue) / 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: hsl(var(--bg-secondary));
+  color: hsl(var(--text-secondary));
+  border: 1px solid hsl(var(--border-color));
+  padding: 10px 20px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background: hsl(var(--bg-tertiary));
+  color: hsl(var(--accent-blue));
+  border-color: hsl(var(--accent-blue) / 0.5);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, hsl(var(--text-primary)) 20%, hsl(var(--text-secondary)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.accent-gradient {
+  background: linear-gradient(135deg, hsl(var(--accent-blue)), hsl(var(--accent-purple)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Interactive form inputs */
+.form-input {
+  background: hsl(var(--bg-secondary));
+  border: 1px solid hsl(var(--border-color));
+  color: hsl(var(--text-primary));
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.form-input::placeholder {
+  color: hsl(var(--text-muted));
+}
+
+.form-input:focus {
+  border-color: hsl(var(--accent-blue));
+  box-shadow: 0 0 0 3px hsl(var(--accent-blue) / 0.1);
+}
+
+.form-input:hover {
+  border-color: hsl(var(--accent-blue) / 0.5);
+}
+
+/* Table Row Hover State */
+tr {
+  transition: background-color 0.15s ease;
+}
+tr:hover {
+  background-color: hsl(var(--accent-blue) / 0.02);
+}
+
+/* Sidebar Nav Button Hover States */
+.sidebar-nav-btn {
+  transition: var(--transition-smooth);
+}
+.sidebar-nav-btn:hover {
+  background-color: hsl(var(--accent-blue) / 0.06) !important;
+  color: hsl(var(--accent-blue)) !important;
+  border-color: hsl(var(--accent-blue) / 0.15) !important;
+}
+
+/* User Profile Badge Hover States */
+.user-profile-badge {
+  transition: var(--transition-smooth);
+}
+.user-profile-badge:hover {
+  background-color: hsl(var(--accent-blue) / 0.06) !important;
+  color: hsl(var(--accent-blue)) !important;
+  border-color: hsl(var(--accent-blue) / 0.15) !important;
+}
+
+
+/* Bed Map Cell Hover States */
+.bed-map-cell {
+  transition: var(--transition-smooth);
+}
+.bed-map-cell:hover {
+  border-color: hsl(var(--accent-blue)) !important;
+  box-shadow: 0 4px 12px hsl(var(--accent-blue) / 0.25);
+  background-color: hsl(var(--accent-blue) / 0.15) !important;
+}
+
+/* Header Icon Button Class - Fixes Theme/Notification color switches */
+.header-icon-btn {
+  background: none;
+  border: none;
+  color: hsl(var(--text-secondary));
+  cursor: pointer;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth), background-color 0.2s ease, color 0.2s ease;
+}
+
+.header-icon-btn:hover {
+  background-color: hsl(var(--accent-blue) / 0.08);
+  color: hsl(var(--accent-blue));
+}
+
+.header-icon-btn.active {
+  background-color: hsl(var(--accent-blue) / 0.12);
+  color: hsl(var(--accent-blue));
+}
+
+/* Custom Multi-Accent Color Themes */
+[data-color-theme="blue"],
+:root {
+  --scrollbar-color: #2563eb;
+  --scrollbar-color-hover: #1d4ed8;
+}
+.dark-theme,
+.dark-theme[data-color-theme="blue"] {
+  --scrollbar-color: #60a5fa;
+  --scrollbar-color-hover: #3b82f6;
+}
+
+[data-color-theme="green"] {
+  --accent-blue: 173 80% 40%;
+  --accent-teal: 142 72% 29%;
+  --accent-purple: 221 83% 53%;
+  --scrollbar-color: #0d9488;
+  --scrollbar-color-hover: #0f766e;
+}
+.dark-theme[data-color-theme="green"],
+[data-color-theme="green"] .dark-theme {
+  --accent-blue: 173 80% 48%;
+  --accent-teal: 142 72% 45%;
+  --accent-purple: 217 91% 64%;
+  --scrollbar-color: #2dd4bf;
+  --scrollbar-color-hover: #14b8a6;
+}
+
+[data-color-theme="purple"] {
+  --accent-blue: 262 83% 58%;
+  --accent-teal: 221 83% 53%;
+  --accent-purple: 173 80% 40%;
+  --scrollbar-color: #8b5cf6;
+  --scrollbar-color-hover: #7c3aed;
+}
+.dark-theme[data-color-theme="purple"],
+[data-color-theme="purple"] .dark-theme {
+  --accent-blue: 262 83% 70%;
+  --accent-teal: 217 91% 64%;
+  --accent-purple: 173 80% 48%;
+  --scrollbar-color: #a78bfa;
+  --scrollbar-color-hover: #8b5cf6;
+}
+
+[data-color-theme="red"] {
+  --accent-blue: 350 89% 60%;
+  --accent-teal: 24 90% 50%;
+  --accent-purple: 221 83% 53%;
+  --scrollbar-color: #e11d48;
+  --scrollbar-color-hover: #be123c;
+}
+.dark-theme[data-color-theme="red"],
+[data-color-theme="red"] .dark-theme {
+  --accent-blue: 350 89% 65%;
+  --accent-teal: 24 90% 60%;
+  --accent-purple: 217 91% 64%;
+  --scrollbar-color: #fb7185;
+  --scrollbar-color-hover: #f43f5e;
+}
+
+[data-color-theme="orange"] {
+  --accent-blue: 22 90% 48%;
+  --accent-teal: 350 89% 60%;
+  --accent-purple: 45 93% 47%;
+  --scrollbar-color: #ea580c;
+  --scrollbar-color-hover: #c2410c;
+}
+.dark-theme[data-color-theme="orange"],
+[data-color-theme="orange"] .dark-theme {
+  --accent-blue: 22 90% 60%;
+  --accent-teal: 350 89% 65%;
+  --accent-purple: 45 93% 58%;
+  --scrollbar-color: #f97316;
+  --scrollbar-color-hover: #ea580c;
+}
+
+[data-color-theme="yellow"] {
+  --accent-blue: 45 93% 47%;
+  --accent-teal: 22 90% 48%;
+  --accent-purple: 173 80% 40%;
+  --scrollbar-color: #ca8a04;
+  --scrollbar-color-hover: #a16207;
+}
+.dark-theme[data-color-theme="yellow"],
+[data-color-theme="yellow"] .dark-theme {
+  --accent-blue: 45 93% 58%;
+  --accent-teal: 22 90% 60%;
+  --accent-purple: 173 80% 48%;
+  --scrollbar-color: #eab308;
+  --scrollbar-color-hover: #ca8a04;
+}
+
+[data-color-theme="pink"] {
+  --accent-blue: 325 85% 55%;
+  --accent-teal: 262 83% 58%;
+  --accent-purple: 221 83% 53%;
+  --scrollbar-color: #db2777;
+  --scrollbar-color-hover: #be185d;
+}
+.dark-theme[data-color-theme="pink"],
+[data-color-theme="pink"] .dark-theme {
+  --accent-blue: 325 85% 65%;
+  --accent-teal: 262 83% 70%;
+  --accent-purple: 217 91% 64%;
+  --scrollbar-color: #ec4899;
+  --scrollbar-color-hover: #db2777;
+}
+
+/* Autofill overrides for consistent theme colors */
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover, 
+.form-input:-webkit-autofill:focus, 
+.form-input:-webkit-autofill:active {
+  -webkit-text-fill-color: #0f172a !important;
+  box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.dark-theme .form-input:-webkit-autofill,
+.dark-theme .form-input:-webkit-autofill:hover, 
+.dark-theme .form-input:-webkit-autofill:focus, 
+.dark-theme .form-input:-webkit-autofill:active {
+  -webkit-text-fill-color: #f8fafc !important;
+  box-shadow: 0 0 0px 1000px #1b2330 inset !important;
+}
+
+/* RTL Helpers */
+[dir="rtl"] {
+  text-align: right;
+}
+[dir="rtl"] .text-left {
+  text-align: right !important;
+}
+[dir="rtl"] .text-right {
+  text-align: left !important;
+}
+
+/* Color swatches hover effects */
+.color-swatch:hover {
+  border-color: hsl(var(--text-primary)) !important;
+}
+.color-swatch-blue:hover { box-shadow: 0 0 10px #2563eb; }
+.color-swatch-green:hover { box-shadow: 0 0 10px #0d9488; }
+.color-swatch-purple:hover { box-shadow: 0 0 10px #8b5cf6; }
+.color-swatch-red:hover { box-shadow: 0 0 10px #e11d48; }
+.color-swatch-orange:hover { box-shadow: 0 0 10px #ea580c; }
+.color-swatch-yellow:hover { box-shadow: 0 0 10px #ca8a04; }
+.color-swatch-pink:hover { box-shadow: 0 0 10px #db2777; }
+
+/* Language Switcher hover styles */
+.lang-toggle-btn {
+  transition: var(--transition-smooth);
+}
+.lang-toggle-btn:hover {
+  background-color: hsl(var(--accent-blue) / 0.08) !important;
+  color: hsl(var(--accent-blue)) !important;
+  border-color: hsl(var(--accent-blue) / 0.3) !important;
+}
+
+/* Password Eye Icons hover states */
+.password-toggle-btn {
+  transition: var(--transition-smooth);
+  border-radius: 50% !important;
+  cursor: pointer;
+}
+.password-toggle-btn:hover {
+  background-color: hsl(var(--accent-blue) / 0.08) !important;
+  color: hsl(var(--accent-blue)) !important;
+}
+
+/* Action Buttons inside Lists */
+.btn-approve {
+  transition: var(--transition-smooth);
+}
+.btn-approve:hover {
+  background-color: hsl(var(--success)) !important;
+  color: #ffffff !important;
+  border-color: hsl(var(--success)) !important;
+}
+
+.btn-deny {
+  transition: var(--transition-smooth);
+}
+.btn-deny:hover {
+  background-color: hsl(var(--danger)) !important;
+  color: #ffffff !important;
+  border-color: hsl(var(--danger)) !important;
+}
+
+.btn-resolve {
+  transition: var(--transition-smooth);
+}
+.btn-resolve:hover {
+  background-color: hsl(var(--success)) !important;
+  color: #ffffff !important;
+  border-color: hsl(var(--success)) !important;
+}
+
+.btn-upvote {
+  transition: var(--transition-smooth);
+}
+.btn-upvote:hover {
+  background-color: hsl(var(--accent-blue)) !important;
+  color: #ffffff !important;
+  border-color: hsl(var(--accent-blue)) !important;
+}
+
+.btn-text-action {
+  transition: var(--transition-smooth);
+}
+.btn-text-action:hover {
+  color: hsl(var(--accent-blue)) !important;
+  text-decoration: underline !important;
+  text-shadow: 0 0 1px hsl(var(--accent-blue) / 0.5);
+}
+
+.btn-delete {
+  transition: var(--transition-smooth);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+.btn-delete:hover {
+  background-color: hsla(var(--danger), 0.1) !important;
+  color: hsl(var(--danger)) !important;
+}
+
+/* Cancel all hover transitions/animations globally */
+*:hover, *:hover::before, *:hover::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+
