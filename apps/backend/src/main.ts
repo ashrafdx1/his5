@@ -88,6 +88,13 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup(`${apiPrefix}/docs`, app, document);
 
+  // Root endpoint for simple health-checks/Render deployment check (avoids NestJS global prefix)
+  const httpAdapter = app.getHttpAdapter();
+  const expressInstance = httpAdapter.getInstance();
+  expressInstance.get('/', (_req: any, res: any) => {
+    res.status(200).json({ status: 'ok', message: 'HIS Backend Services successfully initiated!' });
+  });
+
   const port = process.env.PORT || 3000;
   await app.listen(port);
   
