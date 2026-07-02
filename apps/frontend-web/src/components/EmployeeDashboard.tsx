@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { apiClient } from '../services/api-client';
 import { translations, Language } from '../services/translations';
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1').replace('/api/v1', '');
-
 function getProfilePicUrl(url: string | null | undefined) {
   if (!url) return null;
   if (url.startsWith('http')) return url;
-  return `${API_BASE}${url}`;
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1/v1';
+  const match = apiUrl.match(/^(https?:\/\/[^\/]+)/);
+  const host = match ? match[1] : 'http://localhost:3000';
+  return `${host}${url}`;
 }
 
 interface EmployeeDashboardProps {

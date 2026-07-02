@@ -672,7 +672,10 @@ export function DirectorDashboard({
   const getFullProfilePicUrl = (path: string | null) => {
     if (!path) return '';
     if (path.startsWith('http://') || path.startsWith('https://')) return path;
-    return `http://localhost:3000${path}`;
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1/v1';
+    const match = apiUrl.match(/^(https?:\/\/[^\/]+)/);
+    const host = match ? match[1] : 'http://localhost:3000';
+    return `${host}${path}`;
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
